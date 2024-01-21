@@ -30,11 +30,14 @@ if missing_columns:
     st.warning(f"Missing columns: {missing_columns}. Please check your data.")
 else:
     # Display the trend values
-    st.write(f"Trend values for {selected_stock}:")
-    st.write(selected_stock_data['Trend'].unique())
+    st.subheader(f"Trend values for {selected_stock}:")
+
+    # Show stock symbol, date, and trend values
+    trend_values_data = selected_stock_data[['ExpiryDate', 'Trend']].drop_duplicates()
+    st.write(trend_values_data)
 
     # Create a bar chart for each trend value
-    for trend_value in selected_stock_data['Trend'].unique():
+    for trend_value in trend_values_data['Trend'].unique():
         trend_data = selected_stock_data[selected_stock_data['Trend'] == trend_value]
 
         try:
