@@ -1,26 +1,23 @@
 import streamlit as st
 import pandas as pd
 
-# Load data from Excel file
-excel_file = 'nifty_oi_data.xlsx'
-try:
-    df = pd.read_excel(excel_file)
-except FileNotFoundError:
-    st.error(f"Error: File '{excel_file}' not found. Please check the file path.")
-    st.stop()
+# Load the data
+file_path = 'nifty_oi_data.xlsx'
+df = pd.read_excel(file_path)
 
-# Search box to filter stocks
-search_query = st.sidebar.text_input('Search by Symbol:', '')
-filtered_df = df[df['Symbol'].str.contains(search_query, case=False, na=False)]
+# Sidebar
+st.sidebar.title("Nifty OI Analysis")
+selected_stock = st.sidebar.selectbox("Select Stock", df['Symbol'].unique())
 
-# Check if 'Expiry Date' column exists
-if 'Expiry Date' not in filtered_df.columns:
-    st.error("Error: 'Expiry Date' column not found in the selected data. Please check the data structure.")
-    st.stop()
+# Filter data based on selected stock
+selected_stock_data = df[df['Symbol'] == selected_stock]
 
-# Line chart to display trend
-st.line_chart(filtered_df.set_index('Expiry Date')['Open Interest'])
+# Main content
+st.title(f"Trend Analysis for {selected_stock}")
 
-# Display the selected data
-st.write("Trend for matching stocks:")
-st.write(filtered_df)
+# Display the selected stock data
+st.write(selected_stock_data)
+
+# Display the trend for the selected stock
+st.subheader("Trend:")
+st.write(selected_stock_data['Trend'].iloc[0])
