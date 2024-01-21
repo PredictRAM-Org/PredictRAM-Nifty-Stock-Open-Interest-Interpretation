@@ -7,6 +7,7 @@ file_path = 'nifty_oi_data.xlsx'
 df = pd.read_excel(file_path)
 
 # Sidebar
+st.image("png_2.3-removebg-preview.png", width=400)
 st.sidebar.title("Nifty Stock Futures OI Analysis")
 selected_stock = st.sidebar.selectbox("Select Stock", df['Symbol'].unique())
 
