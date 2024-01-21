@@ -37,6 +37,10 @@ st.write(selected_data)
 chge_percent = selected_data['Chge'].iloc[0]
 open_interest_change = selected_data['Open Interest Change'].iloc[0]
 
+# Print the values for debugging
+st.write(f"Chge: {chge_percent}")
+st.write(f"Open Interest Change: {open_interest_change}")
+
 # Get the market interpretation based on Chge and Open Interest Change
 interpretation = interpretation_dict.get((chge_percent, open_interest_change), 'Not available')
 
