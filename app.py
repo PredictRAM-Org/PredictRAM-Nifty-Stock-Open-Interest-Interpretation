@@ -22,13 +22,20 @@ st.write(selected_stock_data)
 # Display the trend for the selected stock
 st.subheader("Trend:")
 
-# Bar chart for trend
-fig = px.bar(
-    selected_stock_data,
-    x='ExpiryDate',
-    y='Open Interest Change',
-    title=f"Open Interest Change for {selected_stock}",
-    labels={'Open Interest Change': 'Change in Open Interest'},
-)
+# Check if necessary columns are present
+required_columns = ['ExpiryDate', 'Open Interest Change']
+missing_columns = [col for col in required_columns if col not in selected_stock_data.columns]
 
-st.plotly_chart(fig)
+if missing_columns:
+    st.warning(f"Missing columns: {missing_columns}. Please check your data.")
+else:
+    # Bar chart for trend
+    fig = px.bar(
+        selected_stock_data,
+        x='ExpiryDate',
+        y='Open Interest Change',
+        title=f"Open Interest Change for {selected_stock}",
+        labels={'Open Interest Change': 'Change in Open Interest'},
+    )
+    
+    st.plotly_chart(fig)
