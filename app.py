@@ -33,11 +33,11 @@ selected_data = df[df['Symbol'] == selected_stock]
 st.write(f"Data for {selected_stock}:")
 st.write(selected_data)
 
-# Get the Chge% and Open Interest Change values for the selected stock
-chge_percent = selected_data.loc[selected_data.index[0], 'Chge%']
-open_interest_change = selected_data.loc[selected_data.index[0], 'Open Int Chg']
+# Get the Chge and Open Interest Change values for the selected stock
+chge_percent = selected_data['Chge'].iloc[0]
+open_interest_change = selected_data['Open Int Chg'].iloc[0]
 
-# Get the market interpretation based on Chge% and Open Interest Change
+# Get the market interpretation based on Chge and Open Interest Change
 interpretation = interpretation_dict.get((chge_percent, open_interest_change), 'Not available')
 
 # Display the market interpretation
