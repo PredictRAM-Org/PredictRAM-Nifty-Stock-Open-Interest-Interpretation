@@ -5,19 +5,19 @@ import pandas as pd
 file_path = 'nifty_oi_data.xlsx'
 df = pd.read_excel(file_path)
 
-# Define the market interpretation based on the given criteria
+# Define the new market interpretation based on the given criteria
 interpretation_dict = {
-    ('Positive', 'Increasing'): 'Strong bullish trend; new money entering market',
-    ('Positive', 'Decreasing'): 'Potential bearish divergence; watch for reversal',
-    ('Negative', 'Increasing'): 'Strong bearish trend; aggressive selling',
-    ('Negative', 'Decreasing'): 'Potential bullish divergence; watch for reversal',
-    ('Positive', 'Steady'): 'Bullish sentiment; existing trend likely to continue',
-    ('Negative', 'Steady'): 'Bearish sentiment; existing trend likely to continue',
-    ('Positive', 'No Change'): 'Bullish consolidation; potential for a breakout',
-    ('Negative', 'No Change'): 'Bearish consolidation; potential for a breakdown',
-    ('No Change', 'Increasing'): 'Market indecision; potential for a breakout',
-    ('No Change', 'Decreasing'): 'Market indecision; potential for a breakout',
-    ('No Change', 'No Change'): 'Lack of conviction; monitor other indicators',
+    ('Positive', 'Positive'): 'Strong bullish trend; new money entering market',
+    ('Positive', 'Negative'): 'Potential bearish divergence; watch for reversal',
+    ('Negative', 'Positive'): 'Strong bearish trend; aggressive selling',
+    ('Negative', 'Negative'): 'Potential bullish divergence; watch for reversal',
+    ('Positive', 'Below 1%'): 'Bullish sentiment; existing trend likely to continue',
+    ('Negative', 'Below 1%'): 'Bearish sentiment; existing trend likely to continue',
+    ('Positive', 'NoChange'): 'Bullish consolidation; potential for a breakout',
+    ('Negative', 'NoChange'): 'Bearish consolidation; potential for a breakdown',
+    ('NoChange', 'Positive'): 'Market indecision; potential for a breakout',
+    ('NoChange', 'Negative'): 'Market indecision; potential for a breakout',
+    ('NoChange', 'NoChange'): 'Lack of conviction; monitor other indicators',
 }
 
 # Create a Streamlit app
@@ -36,10 +36,6 @@ st.write(selected_data)
 # Get the Chge and Open Interest Change values for the selected stock
 chge_percent = selected_data['Chge'].iloc[0]
 open_interest_change = selected_data['Open Interest Change'].iloc[0]
-
-# Print the values for debugging
-st.write(f"Chge: {chge_percent}")
-st.write(f"Open Interest Change: {open_interest_change}")
 
 # Get the market interpretation based on Chge and Open Interest Change
 interpretation = interpretation_dict.get((chge_percent, open_interest_change), 'Not available')
