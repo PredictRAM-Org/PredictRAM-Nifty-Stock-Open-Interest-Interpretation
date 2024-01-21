@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Load the data from the updated Excel file
-file_path = 'nifty_oi_data_updated.xlsx'
+file_path = 'nifty_oi_data.xlsx'
 df = pd.read_excel(file_path)
 
 # Create a Streamlit app
