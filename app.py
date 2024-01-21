@@ -33,16 +33,19 @@ else:
     st.write(f"Trend values for {selected_stock}:")
     st.write(selected_stock_data['Trend'].unique())
 
-    # Bar chart for trend
-    try:
-        fig = px.bar(
-            selected_stock_data,
-            x='ExpiryDate',
-            y='Open Interest Change',
-            title=f"Open Interest Change for {selected_stock}",
-            labels={'Open Interest Change': 'Change in Open Interest'},
-        )
+    # Create a bar chart for each trend value
+    for trend_value in selected_stock_data['Trend'].unique():
+        trend_data = selected_stock_data[selected_stock_data['Trend'] == trend_value]
 
-        st.plotly_chart(fig)
-    except ValueError as e:
-        st.warning(f"Error creating chart: {e}")
+        try:
+            fig = px.bar(
+                trend_data,
+                x='ExpiryDate',
+                y='Open Interest Change',
+                title=f"Open Interest Change for {selected_stock} - Trend: {trend_value}",
+                labels={'Open Interest Change': 'Change in Open Interest'},
+            )
+
+            st.plotly_chart(fig)
+        except ValueError as e:
+            st.warning(f"Error creating chart: {e}")
