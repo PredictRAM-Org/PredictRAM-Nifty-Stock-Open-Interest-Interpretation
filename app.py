@@ -7,14 +7,14 @@ file_path = 'nifty_oi_data.xlsx'
 df = pd.read_excel(file_path)
 
 # Sidebar
-st.sidebar.title("Nifty OI Analysis")
+st.sidebar.title("Nifty Stock Futures OI Analysis")
 selected_stock = st.sidebar.selectbox("Select Stock", df['Symbol'].unique())
 
 # Filter data based on selected stock
 selected_stock_data = df[df['Symbol'] == selected_stock]
 
 # Main content
-st.title(f"Trend Analysis for {selected_stock}")
+st.title(f"Future Trend Analysis for {selected_stock}")
 
 # Display the selected stock data
 st.write(selected_stock_data)
