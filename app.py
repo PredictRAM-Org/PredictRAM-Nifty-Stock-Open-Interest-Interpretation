@@ -9,11 +9,11 @@ except FileNotFoundError:
     st.error(f"Error: File '{excel_file}' not found. Please check the file path.")
     st.stop()
 
-# Sidebar to select stocks
-selected_stocks = st.sidebar.multiselect('Select Stocks', df['Symbol'].unique())
+# Sidebar to select a single stock from dropdown
+selected_stock = st.sidebar.selectbox('Select Stock', df['Symbol'].unique())
 
-# Filter data based on selected stocks
-filtered_df = df[df['Symbol'].isin(selected_stocks)]
+# Filter data based on selected stock
+filtered_df = df[df['Symbol'] == selected_stock]
 
 # Check if 'Expiry Date' column exists
 if 'Expiry Date' not in filtered_df.columns:
@@ -21,8 +21,8 @@ if 'Expiry Date' not in filtered_df.columns:
     st.stop()
 
 # Line chart to display trend
-st.line_chart(filtered_df.set_index('ExpiryDate')['Open Interest'])
+st.line_chart(filtered_df.set_index('Expiry Date')['Open Interest'])
 
 # Display the selected data
-st.write("Selected Data:")
+st.write(f"Trend for {selected_stock}:")
 st.write(filtered_df)
