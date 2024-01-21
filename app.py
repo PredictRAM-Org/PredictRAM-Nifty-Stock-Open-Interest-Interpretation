@@ -21,7 +21,7 @@ if 'Expiry Date' not in filtered_df.columns:
     st.stop()
 
 # Line chart to display trend
-st.line_chart(filtered_df.set_index('Expiry Date')['Open Interest'])
+st.line_chart(filtered_df.set_index('ExpiryDate')['Open Interest'])
 
 # Display the selected data
 st.write("Selected Data:")
