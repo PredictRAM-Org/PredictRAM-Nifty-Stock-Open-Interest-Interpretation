@@ -16,7 +16,7 @@ selected_stock = st.sidebar.selectbox('Select Stock', df['Symbol'].unique())
 filtered_df = df[df['Symbol'] == selected_stock]
 
 # Check if 'Expiry Date' column exists
-if 'Expiry Date' not in filtered_df.columns:
+if 'ExpiryDate' not in filtered_df.columns:
     st.error("Error: 'Expiry Date' column not found in the selected data. Please check the data structure.")
     st.stop()
 
