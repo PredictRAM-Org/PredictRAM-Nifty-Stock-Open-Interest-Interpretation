@@ -23,7 +23,7 @@ st.write(selected_stock_data)
 st.subheader("Trend:")
 
 # Check if necessary columns are present
-required_columns = ['ExpiryDate', 'Open Interest Change', 'Trend']
+required_columns = ['Symbol', 'ExpiryDate', 'Open Interest Change', 'Trend']
 missing_columns = [col for col in required_columns if col not in selected_stock_data.columns]
 
 if missing_columns:
@@ -33,7 +33,7 @@ else:
     st.subheader(f"Trend values for {selected_stock}:")
 
     # Show stock symbol, date, and trend values
-    trend_values_data = selected_stock_data[['ExpiryDate', 'Trend']].drop_duplicates()
+    trend_values_data = selected_stock_data[['Symbol', 'ExpiryDate', 'Trend']].drop_duplicates()
     st.write(trend_values_data)
 
     # Create a bar chart for each trend value
