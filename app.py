@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 # Load the data
 file_path = 'nifty_oi_data.xlsx'
@@ -20,4 +21,14 @@ st.write(selected_stock_data)
 
 # Display the trend for the selected stock
 st.subheader("Trend:")
-st.write(selected_stock_data['Trend'].iloc[0])
+
+# Bar chart for trend
+fig = px.bar(
+    selected_stock_data,
+    x='ExpiryDate',
+    y='Open Interest Change',
+    title=f"Open Interest Change for {selected_stock}",
+    labels={'Open Interest Change': 'Change in Open Interest'},
+)
+
+st.plotly_chart(fig)
