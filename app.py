@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 # Load the data
-file_path = 'nifty_oi_data.xlsx'
+file_path = '23jan_nifty_oi_data.xlsx'
 df = pd.read_excel(file_path)
 
 # Sidebar
